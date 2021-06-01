@@ -1,6 +1,9 @@
+import java.util.ArrayList;
+
 public class ThreadPool {
        private static ThreadPool instance = null;
-private Thread thread;
+
+
     public static ThreadPool ThreadPoolCreate() {
 
         if (instance == null) {
@@ -10,5 +13,6 @@ private Thread thread;
     }
 
     private ThreadPool(){
+
     }
 }
