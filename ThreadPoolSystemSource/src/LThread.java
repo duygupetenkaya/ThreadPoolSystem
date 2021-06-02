@@ -15,7 +15,7 @@ public class LThread extends Thread {
 
     @Override
     void allocateMemory() {
-
+        memory.setMemory(256);
     }
 
     @Override
@@ -25,10 +25,11 @@ public class LThread extends Thread {
 
     @Override
     void assignPriority() {
-
+        priority.setPriority(5);
     }
 }
- class LThreadMemory extends Memory {
+
+class LThreadMemory extends Memory {
     private double memory;
 
     public LThreadMemory(double memory) {
@@ -45,7 +46,8 @@ public class LThread extends Thread {
 
 
 }
- class LThreadPriority extends Priority {
+
+class LThreadPriority extends Priority {
     private int priority;
 
     public LThreadPriority(int priority) {

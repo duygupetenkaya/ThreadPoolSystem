@@ -15,7 +15,7 @@ public class HThread extends Thread {
 
     @Override
     void allocateMemory() {
-
+        memory.setMemory(512);
     }
 
     @Override
@@ -25,17 +25,17 @@ public class HThread extends Thread {
 
     @Override
     void assignPriority() {
-
+        priority.setPriority(1);
     }
 }
- class HThreadMemory extends Memory {
+
+class HThreadMemory extends Memory {
 
     private double memory;
 
     public HThreadMemory(double memory) {
         this.memory = memory;
     }
-
 
 
     public double getMemory() {
@@ -47,12 +47,14 @@ public class HThread extends Thread {
     }
 
 }
- class HThreadPriority extends Priority {
+
+class HThreadPriority extends Priority {
     private int priority;
 
-    public HThreadPriority( int priority) {
+    public HThreadPriority(int priority) {
         this.priority = priority;
     }
+
     public int getPriority() {
         return priority;
     }
