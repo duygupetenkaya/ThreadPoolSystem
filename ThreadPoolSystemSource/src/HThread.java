@@ -23,7 +23,7 @@ public class HThread extends Thread implements Runnable{
 
     @Override
     void createEntryThread() {
-
+setThreadState("IDLE");
     }
 
     @Override

@@ -1,7 +1,7 @@
 //ConcreteFactory2
 //Template Pattern Concrete2
 
-public class LThread extends Thread implements Runnable{
+public class LThread extends Thread implements Runnable {
     private String threadState;
     private LThreadMemory memory;
     private LThreadPriority priority;
@@ -23,6 +23,7 @@ public class LThread extends Thread implements Runnable{
 
     @Override
     void createEntryThread() {
+        setThreadState("IDLE");
 
     }
 
