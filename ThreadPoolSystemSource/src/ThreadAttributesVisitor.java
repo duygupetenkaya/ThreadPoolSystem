@@ -1,22 +1,10 @@
+//Interface Visitor
 public abstract class ThreadAttributesVisitor {
-    void VisitPriority(Priority p) {
-    }
 
     void VisitMemory(Memory m) {
     }
 }
-
-class PriorityVisitor extends ThreadAttributesVisitor {
-
-    void VisitPriority(HThreadPriority p) {
-        super.VisitPriority(p);
-    }
-
-    void VisitPriority(LThreadPriority p) {
-        super.VisitPriority(p);
-    }
-}
-
+//Concrete Visitor
 class MemoryVisitor extends ThreadAttributesVisitor {
     void VisitMemory(HThreadMemory m) {
         super.VisitMemory(m);

@@ -1,4 +1,6 @@
-public abstract class Thread {
+//Template Pattern Abstract
+//Subject of Observer
+public abstract class Thread implements Runnable{
 
     abstract void allocateMemory();
 
@@ -10,5 +12,9 @@ public abstract class Thread {
         allocateMemory();
         createEntryThread();
         assignPriority();
+    }
+    @Override
+    public void run() {
+        System.out.println("A Thread is running");
     }
 }
