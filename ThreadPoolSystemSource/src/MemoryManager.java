@@ -1,16 +1,17 @@
 //Interface Visitor
-public abstract class MemoryManager {
+interface MemoryManager {
+    abstract void VisitMemory(LThreadMemory m);
 
-    void VisitMemory(Memory m) {
-    }
+    abstract void VisitMemory(HThreadMemory m);
 }
+
 //Concrete Visitor
-class MemoryController extends MemoryManager {
-    void VisitMemory(HThreadMemory m) {
-        super.VisitMemory(m);
+class MemoryController implements MemoryManager {
+    public void VisitMemory(HThreadMemory m) {
+
     }
 
-    void VisitMemory(LThreadMemory m) {
-        super.VisitMemory(m);
+    public void VisitMemory(LThreadMemory m) {
+
     }
 }
