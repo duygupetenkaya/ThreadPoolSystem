@@ -36,6 +36,33 @@ public class LThread extends Thread implements Runnable {
     public void run() {
 
     }
+    //Register the Observers
+    @Override
+    public void Attach(StateWatcher watchers){
+        this.watchers.add(watchers);
+    }
+
+    //Unregister from the list of Observers.
+    @Override
+    public void Detach(StateWatcher watchers){
+        for (int i = 0; i < this.watchers.size(); i++) {
+          /*  if (this.watchers.get(i).getWatcher_name() == watchers.getWatcher_name()) {
+                this.watchers.remove(i);
+                return;
+            }*/
+        }
+    }
+
+    //Notify the Observers.
+    @Override
+    public void Notify(){    // set argument to something that helps
+        // tell the Observers what happened
+        for (int i = 0; i < watchers.size(); i++) {
+
+            watchers.get(i).Update(this);
+        }
+    }
+
 }
 
 
