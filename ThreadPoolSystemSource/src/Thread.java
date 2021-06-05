@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-//Template Pattern Abstract
+//Template of Abstract Factory
 //Subject of Observer
 public abstract class Thread implements Runnable {
     protected ArrayList<StateWatcher> watchers = new ArrayList<StateWatcher>();
