@@ -1,11 +1,11 @@
 //Interface Visitor
-public abstract class ThreadAttributesVisitor {
+public abstract class MemoryManager {
 
     void VisitMemory(Memory m) {
     }
 }
 //Concrete Visitor
-class MemoryVisitor extends ThreadAttributesVisitor {
+class MemoryController extends MemoryManager {
     void VisitMemory(HThreadMemory m) {
         super.VisitMemory(m);
     }
