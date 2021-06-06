@@ -6,8 +6,7 @@ public class LThread extends Thread implements Runnable {
     private LThreadMemory memory;
     private LThreadPriority priority;
 
-    //Concrete ElementB of Visitor
-//Concrete Product1B
+
 
 
     public String getThreadState() {
@@ -68,7 +67,8 @@ public class LThread extends Thread implements Runnable {
 
 }
 
-
+//Concrete ElementB of Visitor
+//Concrete Product1B
 class LThreadMemory extends Memory {
     private double memory;
 
