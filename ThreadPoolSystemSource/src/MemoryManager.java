@@ -7,6 +7,7 @@ interface MemoryManager {
 
 //Concrete Visitor
 class MemoryController implements MemoryManager {
+
     public void VisitMemory(HThreadMemory m) {
 
     }

@@ -1,5 +1,6 @@
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.ExecutorService;
 
 //Singleton Class
 public class ThreadPool {
@@ -17,7 +18,7 @@ public class ThreadPool {
     }
 
     private ThreadPool() {
-        queue = new ArrayBlockingQueue(512);
+        queue = new ArrayBlockingQueue(5);
 
     }
 
@@ -25,10 +26,7 @@ public class ThreadPool {
         queue.add(task);
     }
 
-    public void shutdownImmediately() {
-        for (int i = 0; i < threads.length; i++) {
-            threads[i].setThreadState("IDLE");
-            threads[i] = null;
-        }
+    public void shutdown() {
+
     }
 }

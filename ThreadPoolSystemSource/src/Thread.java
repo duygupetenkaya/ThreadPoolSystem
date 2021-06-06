@@ -28,7 +28,7 @@ public abstract class Thread implements Runnable {
 
     @Override
     public void run() {
-        System.out.println("A Thread is running");
+
     }
 
     //Register the Observers
