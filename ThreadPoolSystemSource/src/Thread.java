@@ -34,9 +34,22 @@ public abstract class Thread extends java.lang.Thread {
         assignPriority();
     }
 
+
     @Override
     public void run() {
-
+        try {
+            // continue until all tasks finished processing
+            while (!threadPool.isThreadPoolShutDownInitiated.get() || !taskQueue.isEmpty()) {
+                Runnable r;
+                // Poll a runnable from the queue and execute it
+                while ((r = taskQueue.poll()) != null) {
+                    r.run();
+                }
+                Thread.sleep(1);
+            }
+        } catch (RuntimeException | InterruptedException e) {
+            throw new ThreadPoolException(e);
+        }
     }
 
     //Register the Observers
