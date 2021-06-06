@@ -13,6 +13,8 @@ public class Main {
         ThreadPool threadPool=ThreadPool.ThreadPoolCreate();
 
         threadPool.execute(r);
+        threadPool.execute(r);
         threadPool.shutdown();
     }
+
 }
