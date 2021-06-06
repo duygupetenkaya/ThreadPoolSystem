@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.BlockingQueue;
 
 //Template of Abstract Factory
@@ -33,6 +34,7 @@ public abstract class Thread extends java.lang.Thread {
         createEntryThread();
         assignPriority();
     }
+
 
 
     @Override

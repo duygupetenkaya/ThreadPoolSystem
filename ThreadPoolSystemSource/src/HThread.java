@@ -5,8 +5,7 @@ import java.util.concurrent.BlockingQueue;
 
 public class HThread extends Thread {
     private String threadState;
-    private HThreadMemory memory;
-    private HThreadPriority priority;
+
 
     public String getThreadState() {
         return threadState;
@@ -24,7 +23,7 @@ public class HThread extends Thread {
 
     @Override
     void allocateMemory() {
-        memory.setMemory(512);
+        new HThreadMemory(512);
     }
 
     @Override
@@ -34,7 +33,7 @@ public class HThread extends Thread {
 
     @Override
     void assignPriority() {
-        priority.setPriority(1);
+        new HThreadPriority(1);
     }
 
 

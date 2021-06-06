@@ -4,7 +4,7 @@ public class Main {
         Runnable r = () -> {
             try {
                 Thread.sleep(1000);
-                System.out.println(Thread.currentThread().getName() + " is executing task.");
+                System.out.println(Thread.currentThread().getPriority() + " is executing task.");
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
