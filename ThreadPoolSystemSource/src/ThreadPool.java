@@ -6,6 +6,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 //Singleton Class
 public class ThreadPool {
+
     private static ThreadPool instance = null;
     // holds tasks
     private BlockingQueue<Runnable> runnableQueue;
