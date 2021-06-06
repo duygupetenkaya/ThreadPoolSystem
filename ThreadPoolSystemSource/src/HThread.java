@@ -1,9 +1,10 @@
 //ConcreteFactory1
 //Template Pattern Concrete1
 
-public class HThread extends Thread implements Runnable {
-    private String threadState;
+import java.util.concurrent.BlockingQueue;
 
+public class HThread extends Thread {
+    private String threadState;
     private HThreadMemory memory;
     private HThreadPriority priority;
 
@@ -15,8 +16,11 @@ public class HThread extends Thread implements Runnable {
         this.threadState = threadState;
     }
 
-
-
+    public HThread(BlockingQueue<Runnable> taskQueue, ThreadPool threadPool) {
+        this.taskQueue = taskQueue;
+        this.threadPool = threadPool;
+        this.createThread();
+    }
 
     @Override
     void allocateMemory() {
@@ -64,7 +68,19 @@ public class HThread extends Thread implements Runnable {
 
     @Override
     public void run() {
-
+        try {
+            // continue until all tasks finished processing
+            while (!threadPool.isThreadPoolShutDownInitiated.get() || !taskQueue.isEmpty()) {
+                Runnable r;
+                // Poll a runnable from the queue and execute it
+                while ((r = taskQueue.poll()) != null) {
+                    r.run();
+                }
+                Thread.sleep(1);
+            }
+        } catch (RuntimeException | InterruptedException e) {
+            throw new ThreadPoolException(e);
+        }
     }
 }
 

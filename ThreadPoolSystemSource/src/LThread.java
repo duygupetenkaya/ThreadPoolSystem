@@ -1,12 +1,12 @@
 //ConcreteFactory2
 //Template Pattern Concrete2
 
-public class LThread extends Thread implements Runnable {
+import java.util.concurrent.BlockingQueue;
+
+public class LThread extends Thread {
     private String threadState;
     private LThreadMemory memory;
     private LThreadPriority priority;
-
-
 
 
     public String getThreadState() {
@@ -17,6 +17,12 @@ public class LThread extends Thread implements Runnable {
         this.threadState = threadState;
     }
 
+
+    public LThread(BlockingQueue<Runnable> taskQueue, ThreadPool threadPool) {
+        this.taskQueue = taskQueue;
+        this.threadPool = threadPool;
+        this.createThread();
+    }
 
     @Override
     void allocateMemory() {
@@ -34,19 +40,15 @@ public class LThread extends Thread implements Runnable {
         priority.setPriority(5);
     }
 
-    @Override
-    public void run() {
-
-    }
     //Register the Observers
     @Override
-    public void Attach(StateWatcher watchers){
+    public void Attach(StateWatcher watchers) {
         this.watchers.add(watchers);
     }
 
     //Unregister from the list of Observers.
     @Override
-    public void Detach(StateWatcher watchers){
+    public void Detach(StateWatcher watchers) {
         for (int i = 0; i < this.watchers.size(); i++) {
           /*  if (this.watchers.get(i).getWatcher_name() == watchers.getWatcher_name()) {
                 this.watchers.remove(i);
@@ -57,7 +59,7 @@ public class LThread extends Thread implements Runnable {
 
     //Notify the Observers.
     @Override
-    public void Notify(){    // set argument to something that helps
+    public void Notify() {    // set argument to something that helps
         // tell the Observers what happened
         for (int i = 0; i < watchers.size(); i++) {
 
@@ -65,6 +67,22 @@ public class LThread extends Thread implements Runnable {
         }
     }
 
+    @Override
+    public void run() {
+        try {
+            // continue until all tasks finished processing
+            while (!threadPool.isThreadPoolShutDownInitiated.get() || !taskQueue.isEmpty()) {
+                Runnable r;
+                // Poll a runnable from the queue and execute it
+                while ((r = taskQueue.poll()) != null) {
+                    r.run();
+                }
+                Thread.sleep(1);
+            }
+        } catch (RuntimeException | InterruptedException e) {
+            throw new ThreadPoolException(e);
+        }
+    }
 }
 
 //Concrete ElementB of Visitor

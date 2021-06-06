@@ -1,10 +1,18 @@
 import java.util.ArrayList;
+import java.util.concurrent.BlockingQueue;
 
 //Template of Abstract Factory
 //Subject of Observer
-public abstract class Thread implements Runnable {
+public abstract class Thread extends java.lang.Thread {
     protected ArrayList<StateWatcher> watchers = new ArrayList<StateWatcher>();
-    private String threadState;
+    protected String threadState;
+
+    // holds tasks
+    protected BlockingQueue<Runnable> taskQueue;
+
+    // check if shutdown is initiated
+    protected ThreadPool threadPool;
+
 
     public String getThreadState() {
         return threadState;
