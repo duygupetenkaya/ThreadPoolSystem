@@ -5,7 +5,8 @@ import java.util.concurrent.BlockingQueue;
 
 public class LThread extends Thread {
     private String threadState;
-
+    ThreadAttributes memory;
+    ThreadAttributes priority;
 
 
     public String getThreadState() {
@@ -17,15 +18,15 @@ public class LThread extends Thread {
     }
 
 
-    public LThread(BlockingQueue<Runnable> taskQueue, ThreadPool threadPool) {
-        this.taskQueue = taskQueue;
+    public LThread(ThreadPool threadPool) {
+
         this.threadPool = threadPool;
         this.createThread();
     }
 
     @Override
     void allocateMemory() {
-        new LThreadMemory(256);
+        memory = new LThreadMemory(256);
     }
 
     @Override
@@ -36,7 +37,7 @@ public class LThread extends Thread {
 
     @Override
     void assignPriority() {
-       new HThreadPriority(5);
+        priority = new HThreadPriority(5);
     }
 
     //Register the Observers

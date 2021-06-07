@@ -1,15 +1,15 @@
 abstract class ThreadAttributes {
-    abstract public double getValue();
+    abstract public int getValue();
 }
 
 //Abstract Element of Visitor
 //Abstract Product1
 abstract class Memory extends ThreadAttributes {
 
-    protected double memory;
+    protected int memory;
 
     @Override
-    public double getValue() {
+    public int getValue() {
         return memory;
     }
 }
@@ -20,7 +20,7 @@ abstract class Priority extends ThreadAttributes {
 
 
     @Override
-    public double getValue() {
+    public int getValue() {
         return priority;
     }
 }

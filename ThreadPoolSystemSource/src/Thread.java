@@ -4,12 +4,10 @@ import java.util.concurrent.BlockingQueue;
 
 //Template of Abstract Factory
 //Subject of Observer
-public abstract class Thread extends java.lang.Thread {
+public abstract class Thread  {
     protected ArrayList<StateWatcher> watchers = new ArrayList<StateWatcher>();
     protected String threadState;
 
-    // holds tasks
-    protected BlockingQueue<Runnable> taskQueue;
 
     // check if shutdown is initiated
     protected ThreadPool threadPool;
@@ -37,21 +35,9 @@ public abstract class Thread extends java.lang.Thread {
 
 
 
-    @Override
+
     public void run() {
-        try {
-            // continue until all tasks finished processing
-            while (!threadPool.isThreadPoolShutDownInitiated.get() || !taskQueue.isEmpty()) {
-                Runnable r;
-                // Poll a runnable from the queue and execute it
-                while ((r = taskQueue.poll()) != null) {
-                    r.run();
-                }
-                Thread.sleep(1);
-            }
-        } catch (RuntimeException | InterruptedException e) {
-            throw new ThreadPoolException(e);
-        }
+
     }
 
     //Register the Observers

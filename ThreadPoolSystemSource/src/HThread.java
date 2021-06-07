@@ -5,7 +5,8 @@ import java.util.concurrent.BlockingQueue;
 
 public class HThread extends Thread {
     private String threadState;
-
+ThreadAttributes memory;
+ThreadAttributes priority;
 
     public String getThreadState() {
         return threadState;
@@ -15,15 +16,14 @@ public class HThread extends Thread {
         this.threadState = threadState;
     }
 
-    public HThread(BlockingQueue<Runnable> taskQueue, ThreadPool threadPool) {
-        this.taskQueue = taskQueue;
+    public HThread( ThreadPool threadPool) {
         this.threadPool = threadPool;
         this.createThread();
     }
 
     @Override
     void allocateMemory() {
-        new HThreadMemory(512);
+        memory=new HThreadMemory(512);
     }
 
     @Override
@@ -33,7 +33,7 @@ public class HThread extends Thread {
 
     @Override
     void assignPriority() {
-        new HThreadPriority(1);
+        priority=new HThreadPriority(1);
     }
 
 
