@@ -17,7 +17,7 @@ public class ThreadPool {
     protected AtomicBoolean isThreadPoolShutDownInitiated;
 
 
-    public static ThreadPool ThreadPoolCreate() {
+    public static ThreadPool ThreadPoolCreate() throws InterruptedException {
 
         if (instance == null) {
             instance = new ThreadPool();
@@ -25,13 +25,29 @@ public class ThreadPool {
         return instance;
     }
 
-    private ThreadPool() {
+    private ThreadPool() throws InterruptedException {
         this.runnableQueue = new LinkedBlockingQueue<>();
         this.threads = createThreadPoolThreads();
         this.isThreadPoolShutDownInitiated = new AtomicBoolean(false);
 
         for (int i = 0; i < threads.size(); i++) {
             threads.get(i).start();
+            int finalI = i;
+            Runnable r = () -> {
+                try {
+                    threads.get(finalI).sleep(1000);
+                    System.out.println(threads.get(finalI).getThreadState()+"-"
+                         + threads.get(finalI).getPriority() + " is executing task.");
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            };
+
+            this.execute(r);
+            this.execute(r);
+        if(finalI==runnableQueue.size())
+        {    this.shutdown();
+            System.out.println("Threadpool is shutting down");}
         }
     }
 
