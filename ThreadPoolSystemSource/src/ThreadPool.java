@@ -8,7 +8,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class ThreadPool {
 
     private static ThreadPool instance = null;
-    // holds
     // holds the pool of worker threads
     private List<Thread> threads;
 
