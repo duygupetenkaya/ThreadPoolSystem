@@ -1,21 +1,26 @@
 //Abstract Observer
-public abstract class Watcher {
-    abstract void Update(Thread thread);
-
+interface Watcher {
+    void Update(Thread thread);
 }
 
-//Concrete Observer
-class StateWatcher extends Watcher {
-    private String threadState;
-    private HThread Hthread;
-    private LThread Lthread;
+//Concrete Observer->Investor
+class StateWatcher implements Watcher {
+    private String watcher_name;
+    private Thread thread;
 
     @Override
-    void Update(Thread thread) {
-             threadState = thread.getThreadState();
+    public void Update(Thread _thread) {
 
-       /* System.out.println("Notified " + watcher_name + " of " + securityCamName +
-                "'s " + "change to " + threadState);*/
+        if (thread.getThreadState().equals("IDLE"))
+            thread.setThreadState("BUSY");
+        else
+            thread.setThreadState("IDLE");
+
+        System.out.println("Notified " + watcher_name + " of " + _thread.getThreadState()+
+                "'s " + "change to " + thread.getThreadState());
     }
 
+    public String getWatcher_name() {
+        return watcher_name;
+    }
 }

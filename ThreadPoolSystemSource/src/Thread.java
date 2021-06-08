@@ -1,17 +1,11 @@
 import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.BlockingQueue;
 
 //Template of Abstract Factory
 //Subject of Observer
-public abstract class Thread  {
-    protected ArrayList<StateWatcher> watchers = new ArrayList<StateWatcher>();
+public abstract class Thread {
+    protected ArrayList<StateWatcher> stateWatchers = new ArrayList<StateWatcher>();
     protected String threadState;
-
-
-    // check if shutdown is initiated
     protected ThreadPool threadPool;
-
 
     public String getThreadState() {
         return threadState;
@@ -33,19 +27,25 @@ public abstract class Thread  {
         assignPriority();
     }
 
-
-
-
-    public void run() {
-
+    //Register the Observers
+    void Attach(StateWatcher watchers) {
+        this.stateWatchers.add(watchers);
     }
 
-    //Register the Observers
-    abstract void Attach(StateWatcher watchers);
-
     //Unregister from the list of Observers.
-    abstract void Detach(StateWatcher watchers);
+    void Detach(StateWatcher watchers) {
+        for (int i = 0; i < this.stateWatchers.size(); i++) {
+            if (this.stateWatchers.get(i).getWatcher_name() == watchers.getWatcher_name()) {
+                this.stateWatchers.remove(i);
+                return;
+            }
+        }
+    }
 
     //Notify the Observers.
-    abstract void Notify();
+    void Notify() {
+        for (int i = 0; i < stateWatchers.size(); i++) {
+            stateWatchers.get(i).Update(this);
+        }
+    }
 }

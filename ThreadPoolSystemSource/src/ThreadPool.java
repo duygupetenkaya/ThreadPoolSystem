@@ -6,17 +6,13 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 //Singleton Class
 public class ThreadPool {
-
     private static ThreadPool instance = null;
     // holds the pool of worker threads
     private List<Thread> threads;
-
     // check if shutdown is initiated
     protected AtomicBoolean isThreadPoolShutDownInitiated;
 
-
     public static ThreadPool ThreadPoolCreate() throws InterruptedException {
-
         if (instance == null) {
             instance = new ThreadPool();
         }
@@ -43,12 +39,10 @@ public class ThreadPool {
 
     public List<Thread> createThreadPoolThreads() {
         List<Thread> threads = new ArrayList<>();
-
         threads.add(new HThread( this));
         threads.add(new HThread( this));
         threads.add(new LThread( this));
         threads.add(new LThread( this));
-
         return threads;
     }
 }
