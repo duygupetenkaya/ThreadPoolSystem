@@ -12,6 +12,8 @@ abstract class Memory extends ThreadAttributes {
     public int getValue() {
         return memory;
     }
+
+    abstract void accept(MemoryManager manager);
 }
 
 //Abstract Product2

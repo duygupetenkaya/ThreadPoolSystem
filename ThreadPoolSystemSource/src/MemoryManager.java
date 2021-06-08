@@ -9,10 +9,12 @@ interface MemoryManager {
 class MemoryController implements MemoryManager {
 
     public void VisitMemory(HThreadMemory m) {
+        m.setMemory(m.getValue()*2);
 
     }
 
     public void VisitMemory(LThreadMemory m) {
+        m.setMemory(m.getValue()*2);
 
     }
 }

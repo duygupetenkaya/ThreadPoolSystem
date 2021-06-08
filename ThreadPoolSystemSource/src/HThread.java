@@ -86,7 +86,9 @@ class HThreadMemory extends Memory {
         this.memory = memory;
     }
 
-
+    public void accept(MemoryManager manager){
+        manager.VisitMemory(this);
+    }
 }
 
 //ConcreteProduct2A
