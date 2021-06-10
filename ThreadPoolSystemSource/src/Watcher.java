@@ -6,18 +6,17 @@ interface Watcher {
 //Concrete Observer->Investor
 class StateWatcher implements Watcher {
     private String watcher_name;
-    private Thread thread;
+    private HThread hthread;
 
     @Override
     public void Update(Thread _thread) {
-
-        if (thread.getThreadState().equals("IDLE"))
-            thread.setThreadState("BUSY");
+        _thread.createEntryThread();
+        if (_thread.getThreadState().equals("IDLE"))
+            _thread.setThreadState("BUSY");
         else
-            thread.setThreadState("IDLE");
+            _thread.setThreadState("IDLE");
 
-        System.out.println("Notified " + watcher_name + " of " + _thread.getThreadState()+
-                "'s " + "change to " + thread.getThreadState());
+        System.out.println("Notified " + getWatcher_name() +  " change to " + _thread.getThreadState());
     }
 
     public String getWatcher_name() {

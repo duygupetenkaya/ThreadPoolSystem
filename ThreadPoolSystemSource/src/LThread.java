@@ -1,7 +1,7 @@
 //ConcreteFactory2
 //Template Pattern Concrete2
 
-import java.util.concurrent.BlockingQueue;
+
 
 public class LThread extends Thread {
     private String threadState;
@@ -9,12 +9,14 @@ public class LThread extends Thread {
     ThreadAttributes priority;
 
     public String getThreadState() {
+
+        Notify();
         return threadState;
     }
 
     public void setThreadState(String threadState) {
+
         this.threadState = threadState;
-        notify();
     }
 
     public LThread(ThreadPool threadPool) {
@@ -36,7 +38,7 @@ public class LThread extends Thread {
 
     @Override
     void assignPriority() {
-        priority = new HThreadPriority(5);
+        priority = new LThreadPriority(5);
     }
 }
 

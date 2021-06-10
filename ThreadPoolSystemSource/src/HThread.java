@@ -3,16 +3,18 @@
 
 public class HThread extends Thread {
     private String threadState;
-    ThreadAttributes memory;
-    ThreadAttributes priority;
+    private ThreadAttributes memory;
+    private ThreadAttributes priority;
 
     public String getThreadState() {
+        Notify();
         return threadState;
+
     }
 
     public void setThreadState(String threadState) {
         this.threadState = threadState;
-        notify();
+
     }
 
     public HThread(ThreadPool threadPool) {
@@ -22,19 +24,36 @@ public class HThread extends Thread {
 
     @Override
     void allocateMemory() {
-        memory = new HThreadMemory(512);
+        setMemory(new HThreadMemory(512));
+        System.out.println(((HThreadMemory) getMemory()).getMemory());
     }
 
     @Override
     void createEntryThread() {
         setThreadState("IDLE");
+        System.out.println(getThreadState());
     }
 
     @Override
     void assignPriority() {
-        priority = new HThreadPriority(1);
+        setPriority(new HThreadPriority(1));
     }
 
+    public ThreadAttributes getMemory() {
+        return memory;
+    }
+
+    public void setMemory(ThreadAttributes memory) {
+        this.memory = memory;
+    }
+
+    public ThreadAttributes getPriority() {
+        return priority;
+    }
+
+    public void setPriority(ThreadAttributes priority) {
+        this.priority = priority;
+    }
 }
 
 //Concrete ElementA of Visitor
@@ -48,6 +67,7 @@ class HThreadMemory extends Memory {
     }
 
     public double getMemory() {
+
         return memory;
     }
 
