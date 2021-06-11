@@ -3,8 +3,8 @@
 
 
 public class LThread extends Thread {
-    private String threadState;
     private LThreadPriority priority;
+private LThreadMemory memory;
 
     public LThread(ThreadPool threadPool) {
         this.createThread();

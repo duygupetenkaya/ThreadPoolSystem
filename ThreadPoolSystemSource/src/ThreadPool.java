@@ -10,11 +10,11 @@ public class ThreadPool {
     // holds the pool of worker threads
     private List<Thread> threads=new ArrayList<>();
     // check if shutdown is initiated
-    protected AtomicBoolean isThreadPoolShutDownInitiated;
+    private AtomicBoolean isThreadPoolShutDownInitiated;
 
     String threadPoolName="SE311-ThreadPool";
 
-    public static ThreadPool ThreadPoolCreate() throws InterruptedException {
+    public static ThreadPool threadPoolCreate() throws InterruptedException {
         if (instance == null) {
             instance = new ThreadPool();
 

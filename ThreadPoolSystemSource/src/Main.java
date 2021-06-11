@@ -3,7 +3,7 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) throws InterruptedException {
-        ThreadPool threadPool = ThreadPool.ThreadPoolCreate();
+        ThreadPool threadPool = ThreadPool.threadPoolCreate();
         List<Thread> threads = threadPool.getThreads();
         MemoryController memoryController=new MemoryController();
 
