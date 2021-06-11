@@ -4,6 +4,8 @@ import java.util.ArrayList;
 //Subject of Observer
 public abstract class Thread {
     protected ArrayList<StateWatcher> stateWatchers = new ArrayList<StateWatcher>();
+    MemoryController memoryController=new MemoryController();
+
     protected String threadState;
 
     public String getThreadState() {
@@ -28,7 +30,7 @@ public abstract class Thread {
     }
 
     //Register the Observers
-    void Attach(StateWatcher watchers) {
+    void attach(StateWatcher watchers) {
         this.stateWatchers.add(watchers);
     }
 

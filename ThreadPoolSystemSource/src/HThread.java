@@ -24,7 +24,7 @@ public class HThread extends Thread {
 
     @Override
     void allocateMemory() {
-        memory=new HThreadMemory(512);
+        this.memory=new HThreadMemory(512);
 
     }
 

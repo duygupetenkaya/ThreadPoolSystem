@@ -5,7 +5,10 @@ interface Watcher {
 
 //Concrete Observer->Investor
 class StateWatcher implements Watcher {
-
+private String threadWatcher;
+public StateWatcher(){
+    threadWatcher="ThreadsMemoryWatcher";
+}
     @Override
     public void Update(Thread _thread) {
        _thread.createEntryThread();

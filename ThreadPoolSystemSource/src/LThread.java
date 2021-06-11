@@ -2,7 +2,6 @@
 //Template Pattern Concrete2
 
 
-
 public class LThread extends Thread {
     private String threadState;
     private LThreadMemory memory;
@@ -21,14 +20,13 @@ public class LThread extends Thread {
 
     public LThread(ThreadPool threadPool) {
         this.createThread();
-        if(threadPool!=null)
-        System.out.println(threadPool.threadPoolName+"- New LThread "+this.threadState+ " Memory: " +this.memory.getValue()+" Priority: "+this.priority.getValue() );
-
+        if (threadPool != null)
+            System.out.println(threadPool.threadPoolName + "- New LThread " + this.threadState + " Memory: " + this.memory.getValue() + " Priority: " + this.priority.getValue());
     }
 
     @Override
     void allocateMemory() {
-        this.memory=new LThreadMemory(256);
+        this.memory = new LThreadMemory(256);
 
     }
 
@@ -53,7 +51,7 @@ class LThreadMemory extends Memory {
     }
 
 
-    public void accept(MemoryManager manager){
+    public void accept(MemoryManager manager) {
         manager.VisitMemory(this);
     }
 
@@ -65,7 +63,6 @@ class LThreadPriority extends Priority {
     public LThreadPriority(int priority) {
         this.priority = priority;
     }
-
 
 
 }

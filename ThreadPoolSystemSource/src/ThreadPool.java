@@ -8,7 +8,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class ThreadPool {
     private static ThreadPool instance = null;
     // holds the pool of worker threads
-    private List<Thread> threads;
+    private List<Thread> threads=new ArrayList<>();
     // check if shutdown is initiated
     protected AtomicBoolean isThreadPoolShutDownInitiated;
 
@@ -40,14 +40,22 @@ public class ThreadPool {
     }
 
     public List<Thread> createThreadPoolThreads() {
-        List<Thread> threads = new ArrayList<>();
+        StateWatcher stateWatcher=new StateWatcher();
+
         threads.add(new HThread( this));
         threads.add(new HThread( this));
         threads.add(new LThread( this));
         threads.add(new LThread( this));
+
+        for (int i = 0; i < threads.size(); i++) {
+            threads.get(i).attach(stateWatcher);
+        }
         return threads;
     }
 
+    public List<Thread> getThreads(){
+        return threads;
+    }
 
 }
 

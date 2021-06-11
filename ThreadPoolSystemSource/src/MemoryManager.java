@@ -35,7 +35,6 @@ class MemoryController implements MemoryManager {
 
     public void VisitMemory(HThreadMemory m) {
         m.setMemory(m.getValue()*2);
-        System.out.println(m.getValue());
 
     }
 
