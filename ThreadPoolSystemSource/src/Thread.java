@@ -4,9 +4,13 @@ import java.util.ArrayList;
 //Subject of Observer
 public abstract class Thread {
     protected ArrayList<StateWatcher> stateWatchers = new ArrayList<StateWatcher>();
-    MemoryController memoryController=new MemoryController();
+    MemoryController memoryController = new MemoryController();
 
+    protected Memory memory;
+    protected Priority priority;
     protected String threadState;
+
+
 
     public String getThreadState() {
         return threadState;
@@ -14,6 +18,7 @@ public abstract class Thread {
 
     public void setThreadState(String threadState) {
         this.threadState = threadState;
+
     }
 
     abstract void allocateMemory();
@@ -22,7 +27,7 @@ public abstract class Thread {
 
     abstract void assignPriority();
 
-    void createThread(){
+    void createThread() {
         allocateMemory();
         createEntryThread();
         assignPriority();

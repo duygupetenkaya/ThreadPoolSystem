@@ -3,23 +3,12 @@
 
 public class HThread extends Thread {
     private String threadState;
-    private HThreadMemory memory;
+
     private HThreadPriority priority;
-
-    public String getThreadState() {
-        Notify();
-        return threadState;
-
-    }
-
-    public void setThreadState(String threadState) {
-        this.threadState = threadState;
-
-    }
 
     public HThread(ThreadPool threadPool) {
         this.createThread();
-        System.out.println(threadPool.threadPoolName+"- New HThread "+this.threadState+ " Memory: " +memory.getValue()+" Priority: "+this.priority.getValue( ));
+        System.out.println(threadPool.threadPoolName+"- New HThread "+this.getThreadState()+ " Memory: " +memory.getValue()+" Priority: "+this.priority.getValue( ));
     }
 
     @Override
@@ -51,7 +40,7 @@ class HThreadMemory extends Memory {
 
 
     public void accept(MemoryManager manager) {
-        manager.VisitMemory(this);
+        manager.visitMemory(this);
     }
 }
 

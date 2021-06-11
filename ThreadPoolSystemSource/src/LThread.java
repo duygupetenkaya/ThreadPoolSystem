@@ -4,24 +4,12 @@
 
 public class LThread extends Thread {
     private String threadState;
-    private LThreadMemory memory;
     private LThreadPriority priority;
-
-    public String getThreadState() {
-
-        Notify();
-        return threadState;
-    }
-
-    public void setThreadState(String threadState) {
-
-        this.threadState = threadState;
-    }
 
     public LThread(ThreadPool threadPool) {
         this.createThread();
         if (threadPool != null)
-            System.out.println(threadPool.threadPoolName + "- New LThread " + this.threadState + " Memory: " + this.memory.getValue() + " Priority: " + this.priority.getValue());
+            System.out.println(threadPool.threadPoolName + "- New LThread " + this.getThreadState() + " Memory: " + this.memory.getValue() + " Priority: " + this.priority.getValue());
     }
 
     @Override
@@ -52,7 +40,7 @@ class LThreadMemory extends Memory {
 
 
     public void accept(MemoryManager manager) {
-        manager.VisitMemory(this);
+        manager.visitMemory(this);
     }
 
 }
