@@ -5,7 +5,6 @@ import java.util.ArrayList;
 public abstract class Thread {
     protected ArrayList<StateWatcher> stateWatchers = new ArrayList<StateWatcher>();
     protected String threadState;
-    protected ThreadPool threadPool;
 
     public String getThreadState() {
         return threadState;
@@ -25,6 +24,7 @@ public abstract class Thread {
         allocateMemory();
         createEntryThread();
         assignPriority();
+
     }
 
     //Register the Observers
@@ -32,7 +32,7 @@ public abstract class Thread {
         this.stateWatchers.add(watchers);
     }
 
-    //Unregister from the list of Observers.
+  /*  //Unregister from the list of Observers.
     void Detach(StateWatcher watchers) {
         for (int i = 0; i < this.stateWatchers.size(); i++) {
             if (this.stateWatchers.get(i).getWatcher_name() == watchers.getWatcher_name()) {
@@ -40,7 +40,7 @@ public abstract class Thread {
                 return;
             }
         }
-    }
+    }*/
 
     //Notify the Observers.
     void Notify() {

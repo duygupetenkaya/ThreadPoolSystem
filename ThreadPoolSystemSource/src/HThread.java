@@ -3,8 +3,8 @@
 
 public class HThread extends Thread {
     private String threadState;
-    private Memory memory;
-    private Priority priority;
+    private HThreadMemory memory;
+    private HThreadPriority priority;
 
     public String getThreadState() {
         Notify();
@@ -18,25 +18,24 @@ public class HThread extends Thread {
     }
 
     public HThread(ThreadPool threadPool) {
-        this.threadPool = threadPool;
         this.createThread();
+        System.out.println(threadPool.threadPoolName+"- New HThread "+this.threadState+ " Memory: " +memory.getValue()+" Priority: "+this.priority.getValue( ));
     }
 
     @Override
     void allocateMemory() {
         memory=new HThreadMemory(512);
-     //   System.out.println(((HThreadMemory) getMemory()).getMemory());
+
     }
 
     @Override
     void createEntryThread() {
-        setThreadState("IDLE");
-        System.out.println(getThreadState());
+        this.setThreadState("IDLE");
     }
 
     @Override
     void assignPriority() {
-        priority=new HThreadPriority(1);
+        this.priority=new HThreadPriority(1);
     }
 
 
@@ -46,20 +45,10 @@ public class HThread extends Thread {
 //Concrete Product1A
 class HThreadMemory extends Memory {
 
-    private double memory;
-
-    public HThreadMemory(double memory) {
+    public HThreadMemory(int memory) {
         this.memory = memory;
     }
 
-    public double getMemory() {
-
-        return memory;
-    }
-
-    public void setMemory(double memory) {
-        this.memory = memory;
-    }
 
     public void accept(MemoryManager manager) {
         manager.VisitMemory(this);
@@ -68,18 +57,11 @@ class HThreadMemory extends Memory {
 
 //ConcreteProduct2A
 class HThreadPriority extends Priority {
-    private int priority;
 
     public HThreadPriority(int priority) {
         this.priority = priority;
     }
 
-    public int getPriority() {
-        return priority;
-    }
 
-    public void setPriority(int priority) {
-        this.priority = priority;
-    }
 
 }

@@ -12,9 +12,12 @@ public class ThreadPool {
     // check if shutdown is initiated
     protected AtomicBoolean isThreadPoolShutDownInitiated;
 
+    String threadPoolName="SE311-ThreadPool";
+
     public static ThreadPool ThreadPoolCreate() throws InterruptedException {
         if (instance == null) {
             instance = new ThreadPool();
+
         }
         return instance;
     }
@@ -22,7 +25,6 @@ public class ThreadPool {
     private ThreadPool() throws InterruptedException {
         this.threads = createThreadPoolThreads();
         this.isThreadPoolShutDownInitiated = new AtomicBoolean(false);
-
     }
 
     public void execute() throws InterruptedException {
@@ -45,6 +47,8 @@ public class ThreadPool {
         threads.add(new LThread( this));
         return threads;
     }
+
+
 }
 
 class ThreadPoolException extends RuntimeException {

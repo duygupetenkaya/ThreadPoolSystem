@@ -5,8 +5,8 @@
 
 public class LThread extends Thread {
     private String threadState;
-    private Memory memory;
-    private Priority priority;
+    private LThreadMemory memory;
+    private LThreadPriority priority;
 
     public String getThreadState() {
 
@@ -20,44 +20,38 @@ public class LThread extends Thread {
     }
 
     public LThread(ThreadPool threadPool) {
-
-        this.threadPool = threadPool;
         this.createThread();
+        if(threadPool!=null)
+        System.out.println(threadPool.threadPoolName+"- New LThread "+this.threadState+ " Memory: " +this.memory.getValue()+" Priority: "+this.priority.getValue() );
+
     }
 
     @Override
     void allocateMemory() {
-        memory = new LThreadMemory(256);
+        this.memory=new LThreadMemory(256);
+
     }
 
     @Override
     void createEntryThread() {
-        setThreadState("IDLE");
+        this.setThreadState("IDLE");
 
     }
 
     @Override
     void assignPriority() {
-        priority = new LThreadPriority(5);
+        this.priority = new LThreadPriority(5);
     }
 }
 
 //Concrete ElementB of Visitor
 //Concrete Product1B
 class LThreadMemory extends Memory {
-    private double memory;
 
-    public LThreadMemory(double memory) {
+    public LThreadMemory(int memory) {
         this.memory = memory;
     }
 
-    public double getMemory() {
-        return memory;
-    }
-
-    public void setMemory(double memory) {
-        this.memory = memory;
-    }
 
     public void accept(MemoryManager manager){
         manager.VisitMemory(this);
@@ -67,18 +61,11 @@ class LThreadMemory extends Memory {
 
 //ConcreteProduct2B
 class LThreadPriority extends Priority {
-    private int priority;
 
     public LThreadPriority(int priority) {
         this.priority = priority;
     }
 
-    public int getPriority() {
-        return priority;
-    }
 
-    public void setPriority(int priority) {
-        this.priority = priority;
-    }
 
 }

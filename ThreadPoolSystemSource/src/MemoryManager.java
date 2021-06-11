@@ -34,12 +34,13 @@ class MemoryManagerStructure extends Memory{
 class MemoryController implements MemoryManager {
 
     public void VisitMemory(HThreadMemory m) {
-        m.setMemory(m.getMemory()*2);
-        System.out.println(m.getMemory());
+        m.setMemory(m.getValue()*2);
+        System.out.println(m.getValue());
+
     }
 
     public void VisitMemory(LThreadMemory m) {
-        m.setMemory(m.getMemory()*2);
+        m.setMemory(m.getValue()*2);
 
     }
 }
