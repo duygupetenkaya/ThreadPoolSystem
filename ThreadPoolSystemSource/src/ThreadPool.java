@@ -59,10 +59,3 @@ public class ThreadPool {
 
 }
 
-class ThreadPoolException extends RuntimeException {
-    private static final long serialVersionUID = 1L;
-
-    public ThreadPoolException(Throwable t) {
-        super(t);
-    }
-}
