@@ -1,23 +1,18 @@
-abstract class ThreadAttributes {
-    abstract public int getValue();
-}
 
 //Abstract Element of Visitor
 //Abstract Product1
-abstract class Memory extends ThreadAttributes {
+abstract class Memory implements _Memory {
     protected int memory;
 
-    @Override
     public int getValue() {
         return memory;
     }
 }
 
 //Abstract Product2
-abstract class Priority extends ThreadAttributes {
+abstract class Priority  {
     protected int priority;
 
-    @Override
     public int getValue() {
         return priority;
     }

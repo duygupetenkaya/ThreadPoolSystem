@@ -5,8 +5,8 @@
 
 public class LThread extends Thread {
     private String threadState;
-    ThreadAttributes memory;
-    ThreadAttributes priority;
+    private Memory memory;
+    private Priority priority;
 
     public String getThreadState() {
 

@@ -21,7 +21,7 @@ public abstract class Thread {
 
     abstract void assignPriority();
 
-    void createThread() {
+    void createThread(){
         allocateMemory();
         createEntryThread();
         assignPriority();
