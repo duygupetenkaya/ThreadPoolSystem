@@ -52,7 +52,7 @@ public abstract class Thread {
     //Notify the Observers.
     void Notify() {
         for (int i = 0; i < stateWatchers.size(); i++) {
-            stateWatchers.get(i).Update(this);
+            stateWatchers.get(i).update(this);
         }
     }
 }
