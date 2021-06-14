@@ -6,12 +6,19 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class ThreadPool {
     private static ThreadPool instance = null;
     // holds the pool of worker threads
-    private List<Thread> threads=new ArrayList<>();
+    private List<Thread> threads = new ArrayList<>();
+
     // check if shutdown is initiated
+    //we could simply use boolean for isThreadPoolShutDownInitiated attribute,
+    //the reason behind we have prefered to use AtomicBoolean is that
+    //unlikely to boolean, AtomicBoolean can automatically change its value
+    //this seems us as more fitted for this application
     private AtomicBoolean isThreadPoolShutDownInitiated;
 
-    String threadPoolName="SE311-ThreadPool";
+    String threadPoolName = "SE311-ThreadPool";
 
+
+    //Singleton creation method
     public static ThreadPool threadPoolCreate() throws InterruptedException {
         if (instance == null) {
             instance = new ThreadPool();
@@ -27,9 +34,9 @@ public class ThreadPool {
 
     public void execute(Thread thread) throws InterruptedException {
         if (!isThreadPoolShutDownInitiated.get()) {
-            if(thread instanceof HThread)
-            System.out.println("HThread is executing the task...");
-            else if(thread instanceof LThread)
+            if (thread instanceof HThread)
+                System.out.println("HThread is executing the task...");
+            else if (thread instanceof LThread)
                 System.out.println("LThread is executing the task...");
         } else {
             throw new InterruptedException("Thread Pool shutdown is initiated, unable to execute task");
@@ -37,17 +44,17 @@ public class ThreadPool {
     }
 
     public void shutdown() {
-        System.out.println("\n"+threadPoolName+" is finished all tasks and shutting down now!");
+        System.out.println("\n" + threadPoolName + " is finished all tasks and shutting down now!");
         isThreadPoolShutDownInitiated = new AtomicBoolean(true);
     }
 
     public List<Thread> createThreadPoolThreads() {
-        StateWatcher stateWatcher=new StateWatcher();
+        StateWatcher stateWatcher = new StateWatcher();
 
-        threads.add(new HThread( this));
-        threads.add(new HThread( this));
-        threads.add(new LThread( this));
-        threads.add(new LThread( this));
+        threads.add(new HThread(this));
+        threads.add(new HThread(this));
+        threads.add(new LThread(this));
+        threads.add(new LThread(this));
 
         for (int i = 0; i < threads.size(); i++) {
             threads.get(i).attach(stateWatcher);
@@ -55,7 +62,7 @@ public class ThreadPool {
         return threads;
     }
 
-    public List<Thread> getThreads(){
+    public List<Thread> getThreads() {
         return threads;
     }
 
@@ -64,14 +71,15 @@ public class ThreadPool {
 
 //Template of Abstract Factory
 //Subject of Observer
- abstract class Thread {
+abstract class Thread {
     protected ArrayList<StateWatcher> stateWatchers = new ArrayList<StateWatcher>();
+
+    //instead of having memoryController both in HThread and LThread classes, we prefer to add it as super class instance
     MemoryController memoryController = new MemoryController();
 
     protected Memory memory;
     protected Priority priority;
     protected String threadState;
-
 
 
     public String getThreadState() {
@@ -89,6 +97,7 @@ public class ThreadPool {
 
     abstract void assignPriority();
 
+    //this is the template method
     void createThread() {
         allocateMemory();
         createEntryThread();
@@ -101,7 +110,7 @@ public class ThreadPool {
         this.stateWatchers.add(watchers);
     }
 
-   //Unregister from the list of Observers.
+    //Unregister from the list of Observers.
     void Detach(StateWatcher watchers) {
         for (int i = 0; i < this.stateWatchers.size(); i++) {
             if (this.stateWatchers.get(i) == watchers) {
