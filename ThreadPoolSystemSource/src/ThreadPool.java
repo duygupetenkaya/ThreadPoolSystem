@@ -25,9 +25,12 @@ public class ThreadPool {
         this.isThreadPoolShutDownInitiated = new AtomicBoolean(false);
     }
 
-    public void execute() throws InterruptedException {
+    public void execute(Thread thread) throws InterruptedException {
         if (!isThreadPoolShutDownInitiated.get()) {
-
+            if(thread instanceof HThread)
+            System.out.println("HThread is executing the task...");
+            else if(thread instanceof LThread)
+                System.out.println("LThread is executing the task...");
         } else {
             throw new InterruptedException("Thread Pool shutdown is initiated, unable to execute task");
         }
