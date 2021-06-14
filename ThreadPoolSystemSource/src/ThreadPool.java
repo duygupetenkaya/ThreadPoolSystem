@@ -97,15 +97,15 @@ public class ThreadPool {
         this.stateWatchers.add(watchers);
     }
 
-  /*  //Unregister from the list of Observers.
+   //Unregister from the list of Observers.
     void Detach(StateWatcher watchers) {
         for (int i = 0; i < this.stateWatchers.size(); i++) {
-            if (this.stateWatchers.get(i).getWatcher_name() == watchers.getWatcher_name()) {
+            if (this.stateWatchers.get(i) == watchers) {
                 this.stateWatchers.remove(i);
                 return;
             }
         }
-    }*/
+    }
 
     //Notify the Observers.
     void Notify() {
