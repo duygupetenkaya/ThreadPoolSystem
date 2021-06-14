@@ -37,6 +37,7 @@ public class ThreadPool {
     }
 
     public void shutdown() {
+        System.out.println("\n"+threadPoolName+" is finished all tasks and shutting down now!");
         isThreadPoolShutDownInitiated = new AtomicBoolean(true);
     }
 

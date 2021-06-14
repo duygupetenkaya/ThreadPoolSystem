@@ -4,11 +4,11 @@
 
 public class LThread extends Thread {
     private LThreadPriority priority;
-private LThreadMemory memory;
+
 
     public LThread(ThreadPool threadPool) {
         this.createThread();
-        if (threadPool != null)
+
             System.out.println(threadPool.threadPoolName + "- New LThread " + this.getThreadState() + " Memory: " + this.memory.getValue() + " Priority: " + this.priority.getValue());
     }
 
@@ -21,7 +21,6 @@ private LThreadMemory memory;
     @Override
     void createEntryThread() {
         this.setThreadState("IDLE");
-
     }
 
     @Override
